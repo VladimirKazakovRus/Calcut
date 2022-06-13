@@ -1,13 +1,11 @@
 package Calc;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import static java.lang.Math.abs;
 
 public class Main {
-    public static void main(String[] args) throws IOException, Exeption {
+    public static void main(String[] args)  {
         // создаем массив арабских чисел
         ArrayList<String> arabNumber = new ArrayList<>(10);
             for (int i = 0; i < 10; i++)
@@ -57,28 +55,17 @@ public class Main {
                 if (countNumber == 2)
                 {
                     System.out.println(arabNumber.contains(Snum1));
-                if (arabNumber.contains(Snum1) == true) {
-                    if (arabNumber.contains(Snum2) == true) {
-                        if (charlist.contains(operation) == true) {
+                if (arabNumber.contains(Snum1)) {
+                    if (arabNumber.contains(Snum2)) {
+                        if (charlist.contains(operation)) {
                             num1 = Integer.parseInt(Snum1);
                             num2 = Integer.parseInt(Snum2);
 
                             switch (operation) {
-                                case "*":
-                                    System.out.println(num1 * num2);
-                                    break;
-
-                                case "/":
-                                    System.out.println(num1 / num2);
-                                    break;
-
-                                case "+":
-                                    System.out.println(num1 + num2);
-                                    break;
-
-                                case "-":
-                                    System.out.println(num1 - num2);
-                                    break;
+                                case "*" -> System.out.println(num1 * num2);
+                                case "/" -> System.out.println(num1 / num2);
+                                case "+" -> System.out.println(num1 + num2);
+                                case "-" -> System.out.println(num1 - num2);
                             }
                         }
                         else {
@@ -107,44 +94,39 @@ public class Main {
                             }
 
                     }
-                } else if (Roman.contains(Snum1) == true) {
-                    if (Roman.contains(Snum2) == true) {
-                        if (charlist.contains(operation) == true) {
+                } else if (Roman.contains(Snum1)) {
+                    if (Roman.contains(Snum2)) {
+                        if (charlist.contains(operation)) {
                             Roman romanOperand1 = Roman.valueOf(Snum1);
                             Roman romanOperand2 = Roman.valueOf(Snum2);
                             num1 = romanOperand1.getFixIndex();
                             num2 = romanOperand2.getFixIndex();
 
                             switch (operation) {
-                                case "*":
+                                case "*" -> {
                                     resultForRoman = num1 * num2;
                                     System.out.println(DecIntoRoman(resultForRoman));
-                                    break;
-
-                                case "/":
+                                }
+                                case "/" -> {
                                     resultForRoman = num1 / num2;
                                     System.out.println(DecIntoRoman(resultForRoman));
-                                    break;
-
-                                case "+":
+                                }
+                                case "+" -> {
                                     resultForRoman = num1 + num2;
                                     System.out.println(DecIntoRoman(resultForRoman));
-                                    break;
-
-                                case "-":
+                                }
+                                case "-" -> {
                                     resultForRoman = num1 - num2;
                                     if (resultForRoman > 0) {
                                         System.out.println(DecIntoRoman(resultForRoman));
-                                        break;
-                                    }
-                                    else {
+                                    } else {
                                         try {
                                             throw new Exception();
                                         } catch (Exception e) {
                                             System.out.println("throws Exception //т.к. в римской системе нет отрицательных чисел");
                                         }
-                                        break;
                                     }
+                                }
                             }
                         }
                         else {
@@ -219,6 +201,7 @@ public class Main {
             }
         }//while(scanner.hasNextLine())
     }//public static void main(String[] args) throws IOException
+
     public static String DecIntoRoman (int result)
     {
         String resultString = "";
