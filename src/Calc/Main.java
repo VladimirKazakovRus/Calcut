@@ -5,13 +5,14 @@ import java.util.Scanner;
 
 
 public class Main {
-    public static void main(String[] args)  {
+
+    public static String calc(String input)
+    {
         // создаем массив арабских чисел
         ArrayList<String> arabNumber = new ArrayList<>(10);
-            for (int i = 0; i < 10; i++)
-            {
-                 arabNumber.add(""+(i+1));
-            }
+        for (int i = 0; i < 10; i++) {
+            arabNumber.add("" + (i + 1));
+        }
         //создаем массив поддерживаемых операций
         ArrayList<String> charlist = new ArrayList<>(4);
         charlist.add("-");
@@ -19,42 +20,30 @@ public class Main {
         charlist.add("*");
         charlist.add("/");
 
-        //создаем сканер
-        Scanner scanner = new Scanner(System.in);
 
-        while(scanner.hasNextLine()) {
+        String Snum1 = "";
+        int num1;
+        String Snum2 = "";
+        int num2;
+        int resultForRoman;
+        int countNumber = 0;
+        String operation = "";
 
-            String Snum1 = "";
-            int num1;
-            String Snum2 = "";
-            int num2;
-            int resultForRoman;
-            int countNumber = 0;
-            String operation = "";
+        //проверяем по символьно
+        for (int i = 0; i < input.length(); i++) {
+            //если символ не пробел и считываем первое число - сложить символ в строку первого числа
+            if (input.charAt(i) != ' ' & countNumber == 0) {
+                Snum1 += input.charAt(i);
+            } else if (input.charAt(i) != ' ' & countNumber == 1) {
+                operation += input.charAt(i);
+            } else if (input.charAt(i) != ' ' & countNumber == 2) {
+                Snum2 += input.charAt(i);
+            } else countNumber++;
+        }
 
-            //вводим выражение
-
-            String rawData = scanner.nextLine();
-
-            //проверяем по символьно
-            for (int i = 0; i < rawData.length(); i++) {
-                //если символ не пробел и считываем первое число - сложить символ в строку первого числа
-                if (rawData.charAt(i) != ' ' & countNumber == 0) {
-                    Snum1 += rawData.charAt(i);
-                } else if (rawData.charAt(i) != ' ' & countNumber == 1) {
-                    operation += rawData.charAt(i);
-                } else if (rawData.charAt(i) != ' ' & countNumber == 2) {
-                    Snum2 += rawData.charAt(i);
-                } else countNumber++;
-            }
-            System.out.println("count="+countNumber+";");
-            System.out.println("num1="+Snum1+";");
-            System.out.println("num2="+Snum2+";");
-            System.out.println("oper"+operation+";");
-            if (countNumber > 1) {
-                if (countNumber == 2)
-                {
-                    System.out.println(arabNumber.contains(Snum1));
+        if (countNumber > 1) {
+            if (countNumber == 2)
+            {
                 if (arabNumber.contains(Snum1)) {
                     if (arabNumber.contains(Snum2)) {
                         if (charlist.contains(operation)) {
@@ -62,36 +51,44 @@ public class Main {
                             num2 = Integer.parseInt(Snum2);
 
                             switch (operation) {
-                                case "*" -> System.out.println(num1 * num2);
-                                case "/" -> System.out.println(num1 / num2);
-                                case "+" -> System.out.println(num1 + num2);
-                                case "-" -> System.out.println(num1 - num2);
+                                case "*" -> {
+                                    return ("" + (num1 * num2));
+                                }
+                                case "/" -> {
+                                    return ("" + (num1 / num2));
+                                }
+                                case "+" -> {
+                                    return ("" + (num1 + num2));
+                                }
+                                case "-" -> {
+                                    return ("" + (num1 - num2));
+                                }
                             }
                         }
                         else {
                             try {
                                 throw new Exception();
                             } catch (Exception e) {
-                                System.out.println("throws Exception //т.к. формат математической операции не удовлетворяет заданию - два операнда и один оператор (+, -, /, *)");
+                                return ("throws Exception //т.к. формат математической операции не удовлетворяет заданию - два операнда и один оператор (+, -, /, *)");
                             }
                         }
                     } else {
-                            if (Integer.parseInt(Snum2) > 10)
-                            {
-                                try {
-                                    throw new Exception();
-                                } catch (Exception e) {
-                                    System.out.println("throws Exception //т.к. формат математической операции не удовлетворяет заданию - два операнда и один оператор (+, -, /, *)");
-                                }
+                        if (Integer.parseInt(Snum2) > 10)
+                        {
+                            try {
+                                throw new Exception();
+                            } catch (Exception e) {
+                                return ("throws Exception //т.к. формат математической операции не удовлетворяет заданию - два операнда и один оператор (+, -, /, *)");
                             }
-                            else
-                            {
-                                try {
-                                    throw new Exception();
-                                } catch (Exception e) {
-                                    System.out.println("throws Exception //т.к. используются одновременно разные системы счисления");
-                                }
+                        }
+                        else
+                        {
+                            try {
+                                throw new Exception();
+                            } catch (Exception e) {
+                                return ("throws Exception //т.к. используются одновременно разные системы счисления");
                             }
+                        }
 
                     }
                 } else if (Roman.contains(Snum1)) {
@@ -105,25 +102,25 @@ public class Main {
                             switch (operation) {
                                 case "*" -> {
                                     resultForRoman = num1 * num2;
-                                    System.out.println(DecIntoRoman(resultForRoman));
+                                    return (DecIntoRoman(resultForRoman));
                                 }
                                 case "/" -> {
                                     resultForRoman = num1 / num2;
-                                    System.out.println(DecIntoRoman(resultForRoman));
+                                    return (DecIntoRoman(resultForRoman));
                                 }
                                 case "+" -> {
                                     resultForRoman = num1 + num2;
-                                    System.out.println(DecIntoRoman(resultForRoman));
+                                    return (DecIntoRoman(resultForRoman));
                                 }
                                 case "-" -> {
                                     resultForRoman = num1 - num2;
                                     if (resultForRoman > 0) {
-                                        System.out.println(DecIntoRoman(resultForRoman));
+                                        return (DecIntoRoman(resultForRoman));
                                     } else {
                                         try {
                                             throw new Exception();
                                         } catch (Exception e) {
-                                            System.out.println("throws Exception //т.к. в римской системе нет отрицательных чисел");
+                                            return ("throws Exception //т.к. в римской системе нет отрицательных чисел");
                                         }
                                     }
                                 }
@@ -133,7 +130,7 @@ public class Main {
                             try {
                                 throw new Exception();
                             } catch (Exception e) {
-                                System.out.println("throws Exception //т.к. формат математической операции не удовлетворяет заданию - два операнда и один оператор (+, -, /, *)");
+                                return ("throws Exception //т.к. формат математической операции не удовлетворяет заданию - два операнда и один оператор (+, -, /, *)");
                             }
                         }
                     }
@@ -145,7 +142,7 @@ public class Main {
                             try {
                                 throw new Exception();
                             } catch (Exception e) {
-                                System.out.println("throws Exception //т.к. формат математической операции не удовлетворяет заданию - два операнда и один оператор (+, -, /, *)");
+                                return ("throws Exception //т.к. формат математической операции не удовлетворяет заданию - два операнда и один оператор (+, -, /, *)");
                             }
                         }
                         else
@@ -153,40 +150,30 @@ public class Main {
                             try {
                                 throw new Exception();
                             } catch (Exception e) {
-                                System.out.println("throws Exception //т.к. используются одновременно разные системы счисления");
+                                return ("throws Exception //т.к. используются одновременно разные системы счисления");
                             }
                         }
                     }
 
                 }
-                    else {
-                        String char1 = "";
-                        char1 += Snum1.charAt(0);
-                        if(Snum1.length()>1 & Roman.contains(char1))
-                        {
-                            try {
-                                throw new Exception();
-                            } catch (Exception e) {
-                                System.out.println("throws Exception //т.к. формат математической операции не удовлетворяет заданию - два операнда и один оператор (+, -, /, *)");
-                            }
-                        }
-                        else
-                        {
-                            try {
-                                throw new Exception();
-                            } catch (Exception e) {
-                                System.out.println("throws Exception //т.к. используются одновременно разные системы счисления");
-                            }
+                else {
+                    String char1 = "";
+                    char1 += Snum1.charAt(0);
+                    if(Snum1.length()>1 & Roman.contains(char1))
+                    {
+                        try {
+                            throw new Exception();
+                        } catch (Exception e) {
+                            return ("throws Exception //т.к. формат математической операции не удовлетворяет заданию - два операнда и один оператор (+, -, /, *)");
                         }
                     }
-
-            }
-                else
-                {
-                    try {
-                        throw new Exception();
-                    } catch (Exception e) {
-                        System.out.println("throws Exception //т.к. формат математической операции не удовлетворяет заданию - два операнда и один оператор (+, -, /, *)");
+                    else
+                    {
+                        try {
+                            throw new Exception();
+                        } catch (Exception e) {
+                            return ("throws Exception //т.к. используются одновременно разные системы счисления");
+                        }
                     }
                 }
 
@@ -196,13 +183,37 @@ public class Main {
                 try {
                     throw new Exception();
                 } catch (Exception e) {
-                    System.out.println("throws Exception //т.к. строка не является математической операцией");
+                    return ("throws Exception //т.к. формат математической операции не удовлетворяет заданию - два операнда и один оператор (+, -, /, *)");
                 }
             }
-        }//while(scanner.hasNextLine())
-    }//public static void main(String[] args) throws IOException
 
-    public static String DecIntoRoman (int result)
+        }
+        else
+        {
+            try {
+                throw new Exception();
+            } catch (Exception e) {
+                return ("throws Exception //т.к. строка не является математической операцией");
+            }
+        }
+        return "";
+    }
+
+
+    public static void main(String[] args) {
+
+        Scanner scanner = new Scanner(System.in);
+
+        while (scanner.hasNextLine()) {
+            String rawData = scanner.nextLine();
+            System.out.println(calc(rawData));
+        }
+    }
+
+
+
+
+    static String DecIntoRoman (int result)
     {
         String resultString = "";
 
