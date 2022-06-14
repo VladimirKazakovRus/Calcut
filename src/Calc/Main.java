@@ -21,36 +21,36 @@ public class Main {
         charlist.add("/");
 
 
-        String Snum1 = "";
+        StringBuilder Snum1 = new StringBuilder();
         int num1;
-        String Snum2 = "";
+        StringBuilder Snum2 = new StringBuilder();
         int num2;
         int resultForRoman;
         int countNumber = 0;
-        String operation = "";
+        StringBuilder operation = new StringBuilder();
 
         //проверяем по символьно
         for (int i = 0; i < input.length(); i++) {
             //если символ не пробел и считываем первое число - сложить символ в строку первого числа
             if (input.charAt(i) != ' ' & countNumber == 0) {
-                Snum1 += input.charAt(i);
+                Snum1.append(input.charAt(i));
             } else if (input.charAt(i) != ' ' & countNumber == 1) {
-                operation += input.charAt(i);
+                operation.append(input.charAt(i));
             } else if (input.charAt(i) != ' ' & countNumber == 2) {
-                Snum2 += input.charAt(i);
+                Snum2.append(input.charAt(i));
             } else countNumber++;
         }
 
         if (countNumber > 1) {
             if (countNumber == 2)
             {
-                if (arabNumber.contains(Snum1)) {
-                    if (arabNumber.contains(Snum2)) {
-                        if (charlist.contains(operation)) {
-                            num1 = Integer.parseInt(Snum1);
-                            num2 = Integer.parseInt(Snum2);
+                if (arabNumber.contains(Snum1.toString())) {
+                    if (arabNumber.contains(Snum2.toString())) {
+                        if (charlist.contains(operation.toString())) {
+                            num1 = Integer.parseInt(Snum1.toString());
+                            num2 = Integer.parseInt(Snum2.toString());
 
-                            switch (operation) {
+                            switch (operation.toString()) {
                                 case "*" -> {
                                     return ("" + (num1 * num2));
                                 }
@@ -73,7 +73,7 @@ public class Main {
                             }
                         }
                     } else {
-                        if (Integer.parseInt(Snum2) > 10)
+                        if (Integer.parseInt(Snum2.toString()) > 10)
                         {
                             try {
                                 throw new Exception();
@@ -91,15 +91,15 @@ public class Main {
                         }
 
                     }
-                } else if (Roman.contains(Snum1)) {
-                    if (Roman.contains(Snum2)) {
-                        if (charlist.contains(operation)) {
-                            Roman romanOperand1 = Roman.valueOf(Snum1);
-                            Roman romanOperand2 = Roman.valueOf(Snum2);
+                } else if (Roman.contains(Snum1.toString())) {
+                    if (Roman.contains(Snum2.toString())) {
+                        if (charlist.contains(operation.toString())) {
+                            Roman romanOperand1 = Roman.valueOf(Snum1.toString());
+                            Roman romanOperand2 = Roman.valueOf(Snum2.toString());
                             num1 = romanOperand1.getFixIndex();
                             num2 = romanOperand2.getFixIndex();
 
-                            switch (operation) {
+                            switch (operation.toString()) {
                                 case "*" -> {
                                     resultForRoman = num1 * num2;
                                     return (DecIntoRoman(resultForRoman));
@@ -215,7 +215,7 @@ public class Main {
 
     static String DecIntoRoman (int result)
     {
-        String resultString = "";
+        StringBuilder resultString = new StringBuilder();
 
     if (result<=10)
     {
@@ -227,16 +227,16 @@ public class Main {
 
             for (int i = 0; i < dozen; i++)
             {
-                resultString += Roman.GetStringName(10);
+                resultString.append(Roman.GetStringName(10));
             }
 
             if (result % 10 != 0)
             {
                 result = result % 10;
-                resultString+=Roman.GetStringName(result);
+                resultString.append(Roman.GetStringName(result));
             }
 
-            return resultString;
+            return resultString.toString();
         }
             else if (result <= 49)
             {
@@ -244,18 +244,18 @@ public class Main {
 
                 for (int i = 0; i < dozen; i++)
                 {
-                    resultString += Roman.GetStringName(10);
+                    resultString.append(Roman.GetStringName(10));
                 }
 
-                resultString+=Roman.GetStringName(50);
+                resultString.append(Roman.GetStringName(50));
 
                 if (result % 10 != 0)
                 {
                     result = result % 10;
-                    resultString+=Roman.GetStringName(result);
+                    resultString.append(Roman.GetStringName(result));
                 }
 
-                return resultString;
+                return resultString.toString();
             }
                 else if (result == 50)
                 {
@@ -266,19 +266,19 @@ public class Main {
 
                         int dozen = (result-50) / 10;
 
-                        resultString+=Roman.GetStringName(50);
+                        resultString.append(Roman.GetStringName(50));
 
                         for (int i = 0; i < dozen; i++) {
-                            resultString += Roman.GetStringName(10);
+                            resultString.append(Roman.GetStringName(10));
                         }
 
                         if (result % 10 != 0)
                         {
                             result = result % 10;
-                            resultString+=Roman.GetStringName(result);
+                            resultString.append(Roman.GetStringName(result));
                         }
 
-                        return resultString;
+                        return resultString.toString();
                     }
                         else if (result <= 99)
                         {
@@ -287,18 +287,18 @@ public class Main {
                             int dozen = (result-80) / 10;
                             System.out.println(dozen);
                             for (int i = 0; i < dozen; i++) {
-                                resultString += Roman.GetStringName(10);
+                                resultString.append(Roman.GetStringName(10));
                             }
                             System.out.println(resultString);
 
-                            resultString+=Roman.GetStringName(100);
+                            resultString.append(Roman.GetStringName(100));
 
                             if (result % 10 != 0)
                             {
                                 result = 10 - (result % 10);
-                                resultString+=Roman.GetStringName(result);
+                                resultString.append(Roman.GetStringName(result));
                             }
-                            return resultString;
+                            return resultString.toString();
                         }
                             else if (result == 100)
                             {
