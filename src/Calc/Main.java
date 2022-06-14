@@ -6,8 +6,7 @@ import java.util.Scanner;
 
 public class Main {
 
-    public static String calc(String input)
-    {
+    public static String calc(String input) {
         // создаем массив арабских чисел
         ArrayList<String> arabNumber = new ArrayList<>(10);
         for (int i = 0; i < 10; i++) {
@@ -42,8 +41,7 @@ public class Main {
         }
 
         if (countNumber > 1) {
-            if (countNumber == 2)
-            {
+            if (countNumber == 2) {
                 if (arabNumber.contains(Snum1.toString())) {
                     if (arabNumber.contains(Snum2.toString())) {
                         if (charlist.contains(operation.toString())) {
@@ -64,8 +62,7 @@ public class Main {
                                     return ("" + (num1 - num2));
                                 }
                             }
-                        }
-                        else {
+                        } else {
                             try {
                                 throw new Exception();
                             } catch (Exception e) {
@@ -73,16 +70,13 @@ public class Main {
                             }
                         }
                     } else {
-                        if (Integer.parseInt(Snum2.toString()) > 10)
-                        {
+                        if (Integer.parseInt(Snum2.toString()) > 10) {
                             try {
                                 throw new Exception();
                             } catch (Exception e) {
                                 return ("throws Exception //т.к. формат математической операции не удовлетворяет заданию - два операнда и один оператор (+, -, /, *)");
                             }
-                        }
-                        else
-                        {
+                        } else {
                             try {
                                 throw new Exception();
                             } catch (Exception e) {
@@ -125,28 +119,23 @@ public class Main {
                                     }
                                 }
                             }
-                        }
-                        else {
+                        } else {
                             try {
                                 throw new Exception();
                             } catch (Exception e) {
                                 return ("throws Exception //т.к. формат математической операции не удовлетворяет заданию - два операнда и один оператор (+, -, /, *)");
                             }
                         }
-                    }
-                    else {
+                    } else {
                         String char2 = "";
                         char2 += Snum2.charAt(0);
-                        if (Snum2.length()>1 & Roman.contains(char2))
-                        {
+                        if (Snum2.length() > 1 & Roman.contains(char2)) {
                             try {
                                 throw new Exception();
                             } catch (Exception e) {
                                 return ("throws Exception //т.к. формат математической операции не удовлетворяет заданию - два операнда и один оператор (+, -, /, *)");
                             }
-                        }
-                        else
-                        {
+                        } else {
                             try {
                                 throw new Exception();
                             } catch (Exception e) {
@@ -155,20 +144,16 @@ public class Main {
                         }
                     }
 
-                }
-                else {
+                } else {
                     String char1 = "";
                     char1 += Snum1.charAt(0);
-                    if(Snum1.length()>1 & Roman.contains(char1))
-                    {
+                    if (Snum1.length() > 1 & Roman.contains(char1)) {
                         try {
                             throw new Exception();
                         } catch (Exception e) {
                             return ("throws Exception //т.к. формат математической операции не удовлетворяет заданию - два операнда и один оператор (+, -, /, *)");
                         }
-                    }
-                    else
-                    {
+                    } else {
                         try {
                             throw new Exception();
                         } catch (Exception e) {
@@ -177,9 +162,7 @@ public class Main {
                     }
                 }
 
-            }
-            else
-            {
+            } else {
                 try {
                     throw new Exception();
                 } catch (Exception e) {
@@ -187,9 +170,7 @@ public class Main {
                 }
             }
 
-        }
-        else
-        {
+        } else {
             try {
                 throw new Exception();
             } catch (Exception e) {
@@ -211,99 +192,77 @@ public class Main {
     }
 
 
-
-
-    static String DecIntoRoman (int result)
-    {
+    static String DecIntoRoman(int result) {
         StringBuilder resultString = new StringBuilder();
 
-    if (result<=10)
-    {
-        return Roman.GetStringName(result);
-    }
-        else if (result<=39)
-        {
+        if (result <= 10) {
+            return Roman.GetStringName(result);
+        } else if (result <= 39) {
             int dozen = result / 10;
 
-            for (int i = 0; i < dozen; i++)
-            {
+            for (int i = 0; i < dozen; i++) {
                 resultString.append(Roman.GetStringName(10));
             }
 
-            if (result % 10 != 0)
-            {
+            if (result % 10 != 0) {
                 result = result % 10;
                 resultString.append(Roman.GetStringName(result));
             }
 
             return resultString.toString();
-        }
-            else if (result <= 49)
-            {
-                int dozen = (result-30) / 10;
+        } else if (result <= 49) {
+            int dozen = (result - 30) / 10;
 
-                for (int i = 0; i < dozen; i++)
-                {
-                    resultString.append(Roman.GetStringName(10));
-                }
-
-                resultString.append(Roman.GetStringName(50));
-
-                if (result % 10 != 0)
-                {
-                    result = result % 10;
-                    resultString.append(Roman.GetStringName(result));
-                }
-
-                return resultString.toString();
+            for (int i = 0; i < dozen; i++) {
+                resultString.append(Roman.GetStringName(10));
             }
-                else if (result == 50)
-                {
-                    return Roman.GetStringName(result);
-                }
-                    else if (result <= 89)
-                    {
 
-                        int dozen = (result-50) / 10;
+            resultString.append(Roman.GetStringName(50));
 
-                        resultString.append(Roman.GetStringName(50));
+            if (result % 10 != 0) {
+                result = result % 10;
+                resultString.append(Roman.GetStringName(result));
+            }
 
-                        for (int i = 0; i < dozen; i++) {
-                            resultString.append(Roman.GetStringName(10));
-                        }
+            return resultString.toString();
+        } else if (result == 50) {
+            return Roman.GetStringName(result);
+        } else if (result <= 89) {
 
-                        if (result % 10 != 0)
-                        {
-                            result = result % 10;
-                            resultString.append(Roman.GetStringName(result));
-                        }
+            int dozen = (result - 50) / 10;
 
-                        return resultString.toString();
-                    }
-                        else if (result <= 99)
-                        {
-                            System.out.println(result);
+            resultString.append(Roman.GetStringName(50));
 
-                            int dozen = (result-80) / 10;
-                            System.out.println(dozen);
-                            for (int i = 0; i < dozen; i++) {
-                                resultString.append(Roman.GetStringName(10));
-                            }
-                            System.out.println(resultString);
+            for (int i = 0; i < dozen; i++) {
+                resultString.append(Roman.GetStringName(10));
+            }
 
-                            resultString.append(Roman.GetStringName(100));
+            if (result % 10 != 0) {
+                result = result % 10;
+                resultString.append(Roman.GetStringName(result));
+            }
 
-                            if (result % 10 != 0)
-                            {
-                                result = 10 - (result % 10);
-                                resultString.append(Roman.GetStringName(result));
-                            }
-                            return resultString.toString();
-                        }
-                            else if (result == 100)
-                            {
-                                return Roman.GetStringName(100);
-                            }
-                            return "";
+            return resultString.toString();
+        } else if (result <= 99) {
+            System.out.println(result);
+
+            int dozen = (result - 80) / 10;
+            System.out.println(dozen);
+            for (int i = 0; i < dozen; i++) {
+                resultString.append(Roman.GetStringName(10));
+            }
+            System.out.println(resultString);
+
+            resultString.append(Roman.GetStringName(100));
+
+            if (result % 10 != 0) {
+                result = 10 - (result % 10);
+                resultString.append(Roman.GetStringName(result));
+            }
+            return resultString.toString();
+        } else if (result == 100) {
+            return Roman.GetStringName(100);
+        }
+        return "";
     }
 }//public class Main
